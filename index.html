@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check-in</title>
+    <link type="text/css" rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+<div id="form">
+    <form id="checkInForm" action="CheckInServlet" method="post">
+        <h2 class="title">Cadastro</h2>
+        <label for="username">Nome Completo</label>
+        <div class="input">
+            <input id="nomeCompleto" name="nomeCompleto" placeholder="Nome Completo" type="text">
+        </div>
+        <label for="email">Email</label>
+        <div class="input">
+            <input id="email" name="email" placeholder="Email" type="text">
+        </div>
+        <button type="submit">CHECK-IN</button>
+    </form>
+</div>
+
+<div id="checkInList">
+    
+</div>
+
+<script>
+    var participantes = [];
+
+    
+    document.getElementById('checkInForm').addEventListener('submit', function(event) {
+        event.preventDefault(); 
+
+        
+        var nomeCompleto = document.getElementById('nomeCompleto').value;
+
+        
+        participantes.push(nomeCompleto);
+
+        
+        document.getElementById('nomeCompleto').value = "";
+
+    
+        atualizarListaCheckIn();
+    });
+
+
+    function atualizarListaCheckIn() {
+        var listaCheckIn = document.getElementById('checkInList');
+        listaCheckIn.innerHTML = "<h3>Participantes:</h3>";
+
+        
+        for (var i = 0; i < participantes.length; i++) {
+            listaCheckIn.innerHTML += "<p>" + participantes[i] + " <button onclick='confirmarCadastro(" + i + ")'>Confirmar</button></p>";
+        }
+    }
+
+    function confirmarCadastro(index) {
+      
+        alert("Cadastro confirmado para: " + participantes[index]);
+    }
+</script>
+
+</body>
+</html>
+
+
